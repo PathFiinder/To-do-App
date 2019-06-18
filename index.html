@@ -1,13 +1,48 @@
 <!DOCTYPE html>
-<html lang="pl"">
+<html lang="pl">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset=" UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>To-do-App Javascript</title>
+    <title>To-do-List Javascript App</title>
     <meta name="author" content="Krystian Konecki">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+    <div class="wrapper">
+        <div class="main">
+            <h1 class="main__title">To-do-List Javascript App</h1>
+            <p class="main__describe">Choose category, title of task and date</p>
+            <div class="main__wrapper">
+                <form class="main__form" action="post">
+                    <p class="main__form__list">
+                        <label class="form__item form__item--text" for="form__text">Task name:</label>
+                        <input class="form__input" type="text" id="form__text" name="task-name" placeholder="Add task"
+                            required>
+                    </p>
+                    <p class="main__form__list">
+                        <label class="form__item form__item--category" for="form__category">Category:</label>
+                        <select class="form__select" name="category-name" id="form__category" required>
+                            <option class="form__select__option" value="Work">Work</option>
+                            <option class="form__select__option" value="House">House</option>
+                            <option class="form__select__option" value="School/Study">School/Study</option>
+                            <option class="form__select__option" value="Other">Other</option>
+                        </select>
+                    </p>
+                    <p class="main__form__list">
+                        <label class="form__item form__item--date" for="form__date">Date:</label>
+                        <input class="form__input" type="date" id="form__date" name="task-date" required>
+                    </p>
+                </form>
+            </div>
+            <button class="main__button">Add task</button>
+        </div>
+        <div class="active-tasks"></div>
+        <div class="finished-tasks"></div>
+    </div>
+    <script src="js/scipt.js"></script>
 </body>
+
 </html>
