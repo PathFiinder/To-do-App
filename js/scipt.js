@@ -39,6 +39,11 @@ const createDiv = (Id, Name, Category, date) => {
 
 createDiv(tasks[0].id, tasks[0].name, tasks[0].category, tasks[0].date);
 
+
+const cleanContent = () => {
+
+}
+
 btnAddTasks.addEventListener('click', () => {
     taskId++;
     const tName = taskName.value;
