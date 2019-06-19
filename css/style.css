@@ -242,11 +242,12 @@
 }
 
 .main__active-tasks__item .active-tasks__item__name, .main__active-tasks__item .active-tasks__item__category, .main__active-tasks__item .active-tasks__item__date {
-  display: inline-block;
+  font-size: 18px;
 }
 
-.main__active-tasks__item .active-tasks__item__name {
-  font-size: 18px;
+.main__active-tasks__item .active-tasks__item__name .item__name--span, .main__active-tasks__item .active-tasks__item__name .item__category--span, .main__active-tasks__item .active-tasks__item__name .item__date--span, .main__active-tasks__item .active-tasks__item__category .item__name--span, .main__active-tasks__item .active-tasks__item__category .item__category--span, .main__active-tasks__item .active-tasks__item__category .item__date--span, .main__active-tasks__item .active-tasks__item__date .item__name--span, .main__active-tasks__item .active-tasks__item__date .item__category--span, .main__active-tasks__item .active-tasks__item__date .item__date--span {
+  font-size: 16px;
+  font-weight: normal;
 }
 
 .main__active-tasks--active {

@@ -16,7 +16,7 @@ const addSection = document.querySelector('.main__add');
 const searchSection = document.querySelector('.main__search');
 let taskId = 0;
 let chooseCategories = [];
-let ifActiveCategory = false;
+let ifDone = false;
 
 //document.querySelector('.form__item__date').valueAsDate = new Date();
 
@@ -36,55 +36,79 @@ searchButton.addEventListener('click', () => {
 
 
 const createDiv = (Id, Name, Category, date) => {
-    const brName = document.createElement('br');
-    const brCat = document.createElement('br');
 
     const divTask = document.createElement('div');
     divTask.classList.add("main__active-tasks__item")
     divTask.dataset.id = `${Id}`;
     document.querySelector(".main__active-tasks").appendChild(divTask);
 
-    
+
     const hTaskName = document.createElement('h3');
     hTaskName.classList.add("active-tasks__item__name");
     hTaskName.textContent = `Task: `;
+    hTaskName.dataset.name = `${Id}`
     document.querySelector(`[data-id = "${Id}"]`).appendChild(hTaskName);
 
     const hSpanName = document.createElement('span');
     hSpanName.classList.add("item__name--span");
     hSpanName.textContent = ` ${Name}`;
     hSpanName.dataset.span_name = `${Id}`;
-    document.querySelector(`[data-id = "${Id}"]`).appendChild(hSpanName);
-    document.querySelector(`[data-span_name = "${Id}"]`).appendChild(brName);
+    document.querySelector(`[data-name = "${Id}"]`).appendChild(hSpanName);
 
 
     const hTaskCategory = document.createElement('h3');
     hTaskCategory.classList.add("active-tasks__item__category");
     hTaskCategory.textContent = `Category: `;
+    hTaskCategory.dataset.cat = `${Id}`
     document.querySelector(`[data-id = "${Id}"]`).appendChild(hTaskCategory);
 
     const hSpanCategory = document.createElement('span');
     hSpanCategory.classList.add("item__category--span");
     hSpanCategory.textContent = ` ${Category}`;
     hSpanCategory.dataset.span_cat = `${Id}`;
-    document.querySelector(`[data-id = "${Id}"]`).appendChild(hSpanCategory);
-    document.querySelector(`[data-span_cat = "${Id}"]`).appendChild(brCat);
+    document.querySelector(`[data-cat = "${Id}"]`).appendChild(hSpanCategory);
+
 
     const hTaskDate = document.createElement('h3');
     hTaskDate.classList.add("active-tasks__item__date");
     hTaskDate.textContent = `Deadline: `;
+    hTaskDate.dataset.date = `${Id}`;
     document.querySelector(`[data-id = "${Id}"]`).appendChild(hTaskDate);
-    
+
     const hSpanDate = document.createElement('span');
-    hSpanDate.classList.add("item__category--date");
+    hSpanDate.classList.add("item__date--span");
     hSpanDate.textContent = ` ${date}`;
     hSpanDate.dataset.span_date = `${Id}`;
-    document.querySelector(`[data-id = "${Id}"]`).appendChild(hSpanDate);
+    document.querySelector(`[data-date = "${Id}"]`).appendChild(hSpanDate);
+
+
+    const hBinIcon = document.createElement('i');
+    hBinIcon.classList.add("fas");
+    hBinIcon.classList.add("fa-trash-alt");
+    hBinIcon.classList.add("active-tasks__item__icon");
+    hBinIcon.dataset.bin = `${Id}`;
+    document.querySelector(`[data-id = "${Id}"]`).appendChild(hBinIcon);
+
+
 
 }
 
+
 createDiv(tasks[0].id, tasks[0].name, tasks[0].category, tasks[0].date);
 
+findBinId = () => {
+    let binId = [...document.querySelectorAll('.active-tasks__item__icon')];
+
+    binId.forEach(index => {
+        index.addEventListener('click', () => {
+            console.log(index.dataset.bin);
+            const deleteTask = document.querySelector(`[data-id = "${index.dataset.bin}"]`);
+            deleteTask.parentNode.removeChild(deleteTask);
+        });
+    });
+};
+
+findBinId();
 
 [...taskCategories].forEach(category => {
     category.addEventListener('click', (event) => {
@@ -92,14 +116,12 @@ createDiv(tasks[0].id, tasks[0].name, tasks[0].category, tasks[0].date);
         if (!category.classList.contains('item__wrapper__button--active')) {
             category.classList.add('item__wrapper__button--active');
             chooseCategories.push(category.textContent);
-            console.log(chooseCategories);
         } else if (category.classList.contains('item__wrapper__button--active')) {
             category.classList.remove('item__wrapper__button--active');
             chooseCategories.forEach((singleCategory) => {
                 if (singleCategory == category.textContent) {
                     const index = chooseCategories.indexOf(singleCategory);
                     chooseCategories.splice(index, 1);
-                    console.log(chooseCategories);
                 }
             })
         }
@@ -109,6 +131,7 @@ createDiv(tasks[0].id, tasks[0].name, tasks[0].category, tasks[0].date);
 const cleanContent = () => {
 
 }
+
 
 btnAddTasks.addEventListener('click', (event) => {
     event.preventDefault();
@@ -127,7 +150,9 @@ btnAddTasks.addEventListener('click', (event) => {
     });
 
     createDiv(taskId, tName, tCategory, tDate);
-    singleCategory = "";
+
+    findBinId();
 })
 
 //tasks.filter((task) => {console.log(task.name == "JS")})
+
