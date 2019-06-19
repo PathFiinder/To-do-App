@@ -4,78 +4,40 @@
     box-sizing: border-box
 
 .wrapper
-    max-width: 1300px
+    max-width: 1200px
     min-height: 100vh
     margin: 0 auto 
-    padding: 40px
-    text-align: center
     position: relative
     overflow: hidden
     font-family: 'Mali', cursive
+    
+    .main__buttons
+        height: 50px
+        display: flex
+        flex-direction: row
+        .main__button
+            flex-basis: 50%
+            border: none
+            background-color: #a7a7a7
+            color: black
+            text-transform: uppercase
+            &--active
+                background-color: #3d2b1f
+                color: white
     .background-image
         position: absolute
-        top: 0
+        top: 50px
         left: 0
         height: 100%
         z-index: -1
         &__photo
             height: 100%
             width: 100%
-    .main
-        width: 500px
-        margin: 0px auto 
-        &__title
-            font-size: 35px
-        &__describe
-            font-size: 20px
-        &__wrapper
-            background-color: white
-            border: 1px solid black
-            height: 160px
-            width: 300px
-            margin: 10px auto
-            text-align: start 
-            overflow: hidden
-            font-size: 18px
-            padding: 2px
-            .main__form
-                &__list
-                    margin-top: 10px
-                    height: 30px
-                    //background-color: red
-                    .main__form__item  
-                        display: inline-block  
-                        width: 100px
-                    .form__item--text
-                        display: block
-                        width: auto
-                        text-align: center
-                        line-height: 30px
-                    #form__text
-                        width: 100%
-                        margin-top: 4px
-                        margin-bottom: 4px
-                        height: 30px
-                    .main__form__input
-                        width: calc(300px - 100px - 4px - 8px)
-                        height: 26px
-                        border: none
-                        padding: 2px
-                        font-size: 14px
-                        background-color: pink
-                .form__list--category
-                    margin-top: 44px
-        &__button
 
 
 
-    .active-tasks
-        margin: 10px auto
-        display: flex
-        flex-direction: row
-        flex-wrap: wrap
-        &__item
-            margin: 5px
-            flex-basis: calc((100% - 30px) / 3)
-            
-        
+
+
+@import "_main-add"
+@import "_main-search"
+

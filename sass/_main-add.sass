@@ -1,0 +1,76 @@
+
+.main__add
+    display: none
+    margin-top: 10px
+    text-align: center
+    &__title
+        font-size: 30px
+    &__describe
+        font-size: 15px
+    &__form
+        width: 90%
+        height: 150px
+        margin: 5px auto
+        display: flex
+        flex-direction: column
+        .add__form__item
+            flex-basis: 50px
+            margin: 1px
+            background-color: #3d2b1f
+            color: white
+            .form__item__title
+                flex-basis: 40%
+                font-size: 16px
+                font-weight: normal
+        .add__form__item--category
+            display: flex
+            flex-direction: row
+            .form__item__wrapper
+                flex-grow: 1
+                background-color: pink
+                display: flex
+                flex-direction: row
+                flex-wrap: wrap
+                .item__wrapper__button
+                    flex-basis: 50%    
+                    border: 0.2px solid black
+                    font-family: 'Mali', cursive
+                    font-size: 12px
+                    font-weight: normal
+                    text-align: center
+                    background-color: #a7a7a7
+                    color: white
+                    &--active
+                        background-color: #6b6b6b
+        .add__form__item--date  
+            line-height: 46px
+            display: flex
+            flex-direction: row
+            .form__item__date
+                flex-grow: 1
+                height: 30px
+                margin: 8px 4px 8px 0px
+                padding: 5px
+                border: none
+        .add__form__item--task
+            display: flex
+            flex-direction: row
+            padding: 6px 5px
+            .form__item__task
+                flex-basis: 85%
+                margin-right: 5px
+                padding: 5px
+                border: none
+                &::placeholder
+                    font-family: 'Mali', cursive
+                    color: black
+            .form__item__task--button
+                flex-grow: 1
+                border: none
+                color: black
+                background-color: yellow
+                border-radius: 25%
+                font-size: 30px
+
+.main__add--active
+    display: block

@@ -13,10 +13,40 @@
 
 <body>
     <div class="wrapper">
+        <div class="main__buttons">
+            <button class="main__button main__button--add main__button--active">add</button>
+            <button class="main__button main__button--search">search</button>
+        </div>
         <figure class="background-image">
             <img src="images/background_2.jpg" alt="Backround photo" class="background-image__photo">
         </figure>
-        <div class="main">
+        <section class="main__add main__add--active">
+            <h2 class="main__add__title">To do List</h2>
+            <p class="main__add__describe">Choose category, date and title of task:</p>
+            <form action="" class="main__add__form">
+                <div class="add__form__item add__form__item--category">
+                    <h3 class="form__item__title">Choose category:</h3>
+                    <div class="form__item__wrapper">
+                        <button class="item__wrapper__button" data-button="work">Work</button>
+                        <button class="item__wrapper__button" data-button="house">House</button>
+                        <button class="item__wrapper__button" data-button="study">School/Study</button>
+                        <button class="item__wrapper__button" data-button="other">Other</button>
+                    </div>
+                </div>
+                <div class="add__form__item  add__form__item--date">
+                    <h3 class="form__item__title">Choose date:</h3>
+                    <input type="date" name="task-date" class="form__item__date">
+                </div>
+                <div class="add__form__item  add__form__item--task">
+                    <input type="text" name="task-name" class="form__item__task" placeholder="Add task" required>
+                    <button class="form__item__task--button">+</button>
+                </div>
+            </form>
+        </section>
+        <section class="main__search">
+                <h2>Serach</h2>
+        </section>
+        <!--<div class="main">
             <h1 class="main__title">To do List</h1>
             <p class="main__describe">Choose category, title of task and date</p>
             <div class="main__wrapper">
@@ -45,6 +75,8 @@
         </div>
         <div class="active-tasks"></div>
         <div class="finished-tasks"></div>
+    </div>
+-->
     </div>
     <script src="js/scipt.js"></script>
 </body>

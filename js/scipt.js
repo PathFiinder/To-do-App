@@ -6,14 +6,33 @@ let tasks = ([{
     ifDone: false
 }])
 
-const btnAddTasks = document.querySelector('.main__button');
+/*const btnAddTasks = document.querySelector('.main__button');
 const taskName = document.querySelector('#form__text');
 const taskCategory = document.querySelector("#form__category");
-const taskDate = document.querySelector('#form__date');
+const taskDate = document.querySelector('#form__date');*/
+const addButton = document.querySelector('.main__button--add');
+const searchButton = document.querySelector('.main__button--search');
+const addSection = document.querySelector('.main__add');
+const searchSection = document.querySelector('.main__search');
 let taskId = 0;
 
+document.querySelector('.form__item__date').valueAsDate = new Date();
 
+addButton.addEventListener('click', () => {
+    addButton.classList.add('main__button--active');
+    searchButton.classList.remove('main__button--active');
+    addSection.classList.add('main__add--active');
+    searchSection.classList.remove('main__search--active');
+})
 
+searchButton.addEventListener('click', () => {
+    addButton.classList.remove('main__button--active');
+    searchButton.classList.add('main__button--active');
+    addSection.classList.remove('main__add--active');
+    searchSection.classList.add('main__search--active');
+})
+
+/*
 const createDiv = (Id, Name, Category, date) => {
     const divTask = document.createElement('div');
     divTask.classList.add("active-tasks__item")
@@ -61,4 +80,4 @@ btnAddTasks.addEventListener('click', () => {
     createDiv(taskId, tName, tCategory, tDate);
 })
 
-//tasks.filter((task) => {console.log(task.name == "JS")})
+//tasks.filter((task) => {console.log(task.name == "JS")})*/
