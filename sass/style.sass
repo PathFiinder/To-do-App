@@ -3,14 +3,14 @@
     padding: 0
     box-sizing: border-box
 
+    
 .wrapper
     max-width: 1200px
     min-height: 100vh
+    height: 100%
     margin: 0 auto 
     position: relative
-    overflow: hidden
     font-family: 'Mali', cursive
-    
     .main__buttons
         height: 50px
         display: flex
@@ -28,7 +28,7 @@
         position: absolute
         top: 50px
         left: 0
-        height: 100%
+        height: calc(100% - 54px)
         z-index: -1
         &__photo
             height: 100%
@@ -40,4 +40,6 @@
 
 @import "_main-add"
 @import "_main-search"
+@import "_main-active-tasks"
+@import "_main-finished-tasks"
 

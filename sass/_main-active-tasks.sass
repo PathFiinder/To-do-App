@@ -1,0 +1,24 @@
+.main__active-tasks
+    display: none
+    width: 90%
+    margin: 20px auto 0px auto
+    position: relative
+    padding-top: 2px
+    &__title
+        font-size: 18px
+        position: absolute
+        top: -12px
+        left: -8px
+    &__item
+        background-color: pink
+        border: 1px solid black
+        margin: 10px 0px
+        .active-tasks__item__name,.active-tasks__item__category, .active-tasks__item__date
+            display: inline-block
+         
+        .active-tasks__item__name
+            font-size: 18px
+            
+
+    &--active
+        display: block

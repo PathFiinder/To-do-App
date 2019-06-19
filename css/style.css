@@ -8,9 +8,9 @@
 .wrapper {
   max-width: 1200px;
   min-height: 100vh;
+  height: 100%;
   margin: 0 auto;
   position: relative;
-  overflow: hidden;
   font-family: 'Mali', cursive;
 }
 
@@ -43,7 +43,7 @@
   position: absolute;
   top: 50px;
   left: 0;
-  height: 100%;
+  height: calc(100% - 54px);
   z-index: -1;
 }
 
@@ -205,6 +205,7 @@
   background-color: yellow;
   border-radius: 25%;
   font-size: 30px;
+  cursor: pointer;
 }
 
 .main__add--active {
@@ -216,6 +217,47 @@
 }
 
 .main__search--active {
+  display: block;
+}
+
+.main__active-tasks {
+  display: none;
+  width: 90%;
+  margin: 20px auto 0px auto;
+  position: relative;
+  padding-top: 2px;
+}
+
+.main__active-tasks__title {
+  font-size: 18px;
+  position: absolute;
+  top: -12px;
+  left: -8px;
+}
+
+.main__active-tasks__item {
+  background-color: pink;
+  border: 1px solid black;
+  margin: 10px 0px;
+}
+
+.main__active-tasks__item .active-tasks__item__name, .main__active-tasks__item .active-tasks__item__category, .main__active-tasks__item .active-tasks__item__date {
+  display: inline-block;
+}
+
+.main__active-tasks__item .active-tasks__item__name {
+  font-size: 18px;
+}
+
+.main__active-tasks--active {
+  display: block;
+}
+
+.main__finished-tasks {
+  display: none;
+}
+
+.main__finished-tasks--active {
   display: block;
 }
 /*# sourceMappingURL=style.css.map */
