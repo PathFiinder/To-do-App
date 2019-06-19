@@ -36,7 +36,8 @@ searchButton.addEventListener('click', () => {
 
 
 const createDiv = (Id, Name, Category, date) => {
-    const br = document.createElement('br');
+    const brName = document.createElement('br');
+    const brCat = document.createElement('br');
 
     const divTask = document.createElement('div');
     divTask.classList.add("main__active-tasks__item")
@@ -54,7 +55,7 @@ const createDiv = (Id, Name, Category, date) => {
     hSpanName.textContent = ` ${Name}`;
     hSpanName.dataset.span_name = `${Id}`;
     document.querySelector(`[data-id = "${Id}"]`).appendChild(hSpanName);
-    document.querySelector(`[data-span_name = "${Id}"]`).appendChild(br);
+    document.querySelector(`[data-span_name = "${Id}"]`).appendChild(brName);
 
 
     const hTaskCategory = document.createElement('h3');
@@ -67,7 +68,7 @@ const createDiv = (Id, Name, Category, date) => {
     hSpanCategory.textContent = ` ${Category}`;
     hSpanCategory.dataset.span_cat = `${Id}`;
     document.querySelector(`[data-id = "${Id}"]`).appendChild(hSpanCategory);
-    document.querySelector(`[data-span_cat = "${Id}"]`).appendChild(br);
+    document.querySelector(`[data-span_cat = "${Id}"]`).appendChild(brCat);
 
     const hTaskDate = document.createElement('h3');
     hTaskDate.classList.add("active-tasks__item__date");
