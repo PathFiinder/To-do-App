@@ -1,5 +1,63 @@
 .main__finished-tasks
     display: none
+    width: 90%
+    margin: 20px auto 0px auto
+    position: relative
+    padding-top: 2px
+    &__title
+        font-size: 18px
+        position: absolute
+        top: -12px
+        left: -8px
+    &__item
+        background-color: white
+        border: 1px solid black
+        margin: 10px 0px
+        position: relative
+        padding: 5px
+        height: 160px
+        .finished-tasks__item__name,.finished-tasks__item__category,.finished-tasks__item__date
+            font-size: 18px
+            .item__name--span, .item__category--span,.item__date--span
+                font-size: 16px
+                font-weight: normal
+        .finished-tasks__item__icon
+            position: absolute
+            top: 50%
+            right: 10px
+            transform: translateY(-50%)
+            font-size: 20px
+            color: red
+        .finished-tasks__item__switch
+            width: 100px
+            height: 55px
+            text-align: center
+            display: flex
+            flex-direction: column
+            justify-content: center
+            position: absolute
+            bottom: 10px
+            right: 10px
+            overflow: hidden
+            font-size: 17px
+            &--wrapper
+                display: flex
+                flex-direction: row
+                border: 1px solid black
+                border-radius: 25px
+            &--false,&--true
+                flex-basis: 50%
+            &--false
+                border-right: 1px solid black
+                border-top-left-radius: 25px
+                border-bottom-left-radius: 25px
+            &--true
+                border-top-right-radius: 25px
+                border-bottom-right-radius: 25px
+            &--active-true
+                background-color: green 
+    &--active
+        display: block
 
-.main__finished-tasks--active
-    display: block
+    &--disable
+        display: none
