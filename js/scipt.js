@@ -3,7 +3,7 @@ let tasks = ([{
     name: "Learn OOP in JavaScript",
     category: "Others",
     date: "2019-06-18",
-    ifDone: false
+    checked: false
 }])
 
 const btnAddTasks = document.querySelector('.form__item__task--button');
@@ -18,9 +18,12 @@ const activeTask = document.querySelector('.main__active-tasks');
 const finishedTask = document.querySelector('.main__finished-tasks');
 const searchedTask = document.querySelector('.main__searched-tasks');
 const searchedTaskName = document.querySelector('.search__item__task');
+
 let taskId = 0;
+let activeList = [];
+let deleteList = [];
+let finishedList = [];
 let chooseCategories = [];
-let ifDone = false;
 
 
 
@@ -115,6 +118,7 @@ const createDivActive = (Id, Name, Category, date) => {
 
     const switchDivWrapperFalse = document.createElement('div');
     switchDivWrapperFalse.classList.add('active-tasks__item__switch--false');
+    switchDivWrapperFalse.classList.add('active-tasks__item__switch--active-false')
     switchDivWrapperFalse.textContent = "false"
     switchDivWrapperFalse.dataset.false = `${Id}`;
     document.querySelector(`[data-wrapper = "${Id}"]`).appendChild(switchDivWrapperFalse);
@@ -258,40 +262,6 @@ const createDivSearched = (Id, Name, Category, date) => {
     hBinIcon.dataset.bins = `${Id}`;
     document.querySelector(`[data-ids = "${Id}"]`).appendChild(hBinIcon);
 }
-createDivActive(tasks[0].id, tasks[0].name, tasks[0].category, tasks[0].date);
-
-
-let binId = [...document.querySelectorAll('.active-tasks__item__icon')];
-
-binId[0].addEventListener('click', () => {
-    const deleteTask = document.querySelector(`[data-id = "${binId[0].dataset.bin}"]`);
-    console.log(binId[0].dataset.bin);
-    deleteTask.remove();
-    //deleteTask.parentNode.removeChild(deleteTask);
-    tasks.splice(binId[0].dataset.bin, 1);
-});
-
-
-
-
-let switchIds = [...document.querySelectorAll('.active-tasks__item__switch--true')];
-document.querySelector(`[data-false = "0"]`).classList.add("active-tasks__item__switch--active-false");
-//switchIds[0].addEventListener('click',)
-
-switchIds.forEach((index, nr) => {
-    index.addEventListener('click', () => {
-        document.querySelector(`[data-false = "${nr}"]`).classList.remove('active-tasks__item__switch--active-false');
-        document.querySelector(`[data-id = "${nr}"]`).remove();
-        document.querySelector('.main__finished-tasks').classList.add('main__finished-tasks--active');
-        createDivFinished(tasks[nr].id, tasks[nr].name, tasks[nr].category, tasks[nr].date);
-        document.querySelector(`[data-truef = "${nr}"]`).classList.add('finished-tasks__item__switch--active-true')
-        //index.classList.add('active-tasks__item__switch--active-true');
-    })
-});
-
-
-
-
 
 [...taskCategories].forEach(category => {
     category.addEventListener('click', (event) => {
@@ -327,6 +297,13 @@ const cleanContent = () => {
 }
 
 
+activeList.push(tasks[0]);
+
+if (activeList != []) {
+    createDivActive(activeList[0].id, activeList[0].name, activeList[0].category, activeList[0].date);
+}
+
+
 btnAddTasks.addEventListener('click', (event) => {
     event.preventDefault();
     taskId++;
@@ -342,13 +319,12 @@ btnAddTasks.addEventListener('click', (event) => {
             name: tName,
             category: tCategory,
             date: tDate,
-            ifDone: false
+            checked: false
         });
 
-        createDivActive(taskId, tName, tCategory, tDate);
-        binId.push(document.querySelector(`[data-bin = "${taskId}"]`));
-        switchIds.push(document.querySelector(`[data-true = "${taskId}"]`));
-        document.querySelector(`[data-false = "${taskId}"]`).classList.add("active-tasks__item__switch--active-false");
+        activeList.push(tasks[taskId]);
+        createDivActive(activeList[taskId].id, activeList[taskId].name, activeList[taskId].category, activeList[taskId].date);
+
     } else {
         if (tName == "" && tCategory == []) {
             alert("Insert task name and choose category");
@@ -364,49 +340,47 @@ btnAddTasks.addEventListener('click', (event) => {
 
 })
 
-searchedTaskName.addEventListener('input', (event) => {
-    event.preventDefault()
-    const searchedTask = searchedTaskName.value.toLowerCase();
-    let idTask = -1;
 
-    tasks.forEach(element => {
-        const eleName = element.name.toLowerCase();
-        const addedSearchedTasks = document.querySelector('.main__searched-tasks__item');
-        //console.log(addedSearchedTasks.dataset.ids);
-        if (searchedTaskName.value != "") {
-            if (eleName.includes(searchedTask) == true) {
-                idTask = element.id;
-                /*if (addedSearchedTasks.dataset.ids != idTask) {*/
-                    createDivSearched(tasks[idTask].id, tasks[idTask].name, tasks[idTask].category, tasks[idTask].date);
-                //}
-            } else {
-                idTask = -1;
-            }
-        } else {
-            addedSearchedTasks.remove();
+activeTask.addEventListener('click', function (event) {
+    if (event.target.dataset.bin) {
+        const idBin = event.target.dataset.bin;
+        deleteList.push(activeList[idBin]);
+        activeList.splice(idBin, 1, null);
+        document.querySelector(`[data-id = "${idBin}"]`).remove();
+    } else if (event.target.dataset.true){
+        const switchTrueId = event.target.dataset.true;
+        document.querySelector(`[data-false = "${switchTrueId}"]`).classList.remove('active-tasks__item__switch--active-false');
+        finishedList.push(activeList[switchTrueId]);
+        document.querySelector(`[data-id = "${switchTrueId}"]`).remove();
+        const nameF = activeList[switchTrueId].name;
+        let idF;
+
+        finishedList.forEach( (element,index) => {
+                if(element.name == nameF){
+                    idF = finishedList.indexOf(element);
+                }
+        }); 
+
+
+        createDivFinished(finishedList[idF].id,finishedList[idF].name,finishedList[idF].category,finishedList[idF].date);
+        document.querySelector(`[data-truef = "${switchTrueId}"]`).classList.add('finished-tasks__item__switch--active-true');
+        if(finishedList != []){
+            finishedTask.classList.add('main__finished-tasks--active');
         }
-    });
-
-
+    }
 
 
 })
 
 
-
-/*if (binId.length > 1) {
-    for (let i = 1; i < binId.length; i++) {
-        binId[i].addEventListener('click', () => {
-            const deleteTask = document.querySelector(`[data-id = "${binId[i].dataset.bin}"]`);
-            deleteTask.remove();
-            console.log(binId[i].dataset.bin);
-            // tasks.splice()
-        })
-    }
-
-}*/
+finishedTask.addEventListener('click',function (event) {
+        if (event.target.dataset.binf) {
+            const idBin = event.target.dataset.binf;
+            deleteList.push(activeList[idBin]);
+            activeList.splice(idBin, 1, null);
+            document.querySelector(`[data-idf = "${idBin}"]`).remove();
+        }
+})
 
 
 
-
-//tasks.filter((task) => {console.log(task.name == "JS")})
