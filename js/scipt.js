@@ -23,6 +23,7 @@ let taskId = 0;
 let activeList = [];
 let deleteList = [];
 let finishedList = [];
+let searchedList = [];
 let chooseCategories = [];
 
 
@@ -46,7 +47,6 @@ searchButton.addEventListener('click', () => {
     searchSection.classList.add('main__search--active');
     activeTask.classList.add('main__active-tasks--disable');
     finishedTask.classList.add('main__finished-tasks--disable');
-    searchedTask.classList.add('main__searched-tasks--active');
 
 })
 
@@ -306,13 +306,13 @@ if (activeList != []) {
 
 btnAddTasks.addEventListener('click', (event) => {
     event.preventDefault();
-    taskId++;
     const tName = taskName.value;
     let tCategory = "";
     tCategory = chooseCategories.join(' , ')
     const tDate = taskDate.value;
 
     if (tName != "" && tCategory != []) {
+        taskId++;
 
         tasks.push({
             id: taskId,
@@ -347,7 +347,7 @@ activeTask.addEventListener('click', function (event) {
         deleteList.push(activeList[idBin]);
         activeList.splice(idBin, 1, null);
         document.querySelector(`[data-id = "${idBin}"]`).remove();
-    } else if (event.target.dataset.true){
+    } else if (event.target.dataset.true) {
         const switchTrueId = event.target.dataset.true;
         document.querySelector(`[data-false = "${switchTrueId}"]`).classList.remove('active-tasks__item__switch--active-false');
         finishedList.push(activeList[switchTrueId]);
@@ -355,16 +355,16 @@ activeTask.addEventListener('click', function (event) {
         const nameF = activeList[switchTrueId].name;
         let idF;
 
-        finishedList.forEach( (element,index) => {
-                if(element.name == nameF){
-                    idF = finishedList.indexOf(element);
-                }
-        }); 
+        finishedList.forEach((element, index) => {
+            if (element.name == nameF) {
+                idF = finishedList.indexOf(element);
+            }
+        });
 
 
-        createDivFinished(finishedList[idF].id,finishedList[idF].name,finishedList[idF].category,finishedList[idF].date);
+        createDivFinished(finishedList[idF].id, finishedList[idF].name, finishedList[idF].category, finishedList[idF].date);
         document.querySelector(`[data-truef = "${switchTrueId}"]`).classList.add('finished-tasks__item__switch--active-true');
-        if(finishedList != []){
+        if (finishedList != []) {
             finishedTask.classList.add('main__finished-tasks--active');
         }
     }
@@ -373,14 +373,61 @@ activeTask.addEventListener('click', function (event) {
 })
 
 
-finishedTask.addEventListener('click',function (event) {
-        if (event.target.dataset.binf) {
-            const idBin = event.target.dataset.binf;
-            deleteList.push(activeList[idBin]);
-            activeList.splice(idBin, 1, null);
-            document.querySelector(`[data-idf = "${idBin}"]`).remove();
-        }
+finishedTask.addEventListener('click', function (event) {
+    if (event.target.dataset.binf) {
+        const idBin = event.target.dataset.binf;
+        deleteList.push(activeList[idBin]);
+        activeList.splice(idBin, 1, null);
+        document.querySelector(`[data-idf = "${idBin}"]`).remove();
+        let finishId;
+
+
+        finishedList.forEach((element) => {
+            if (element.name == finishedList[idBin].name) {
+                finishId = finishedList.indexOf(element);
+            }
+        });
+
+        finishedList.splice(finishId, 1);
+    }
 })
 
+searchSection.addEventListener('input', (event) => {
+    event.preventDefault();
+    searchedTask.classList.add('main__searched-tasks--active');
+    searchedList.forEach(element => {
+        document.querySelector(`[data-ids = "${element.id}"]`).remove();
+    })
 
+
+    searchedList = [];
+    const inputValue = event.target.value.toLowerCase();
+
+    activeList.forEach((element) => {
+        element.checked = false;
+    })
+
+
+
+
+    activeList.forEach((element) => {
+        const eleValue = element.name.toLowerCase();
+        if (inputValue != "") {
+            if (eleValue.includes(inputValue)) {
+                //console.log(element.name);
+                if (element.checked == false) {
+                    searchedList.push(element);
+                    element.checked = true;
+                }
+            }
+        }
+    })
+
+
+    searchedList.forEach((element) => {
+        createDivSearched(element.id, element.name, element.category, element.date);
+    })
+    //console.log(searchedList);
+
+})
 
