@@ -5,15 +5,13 @@
           box-sizing: border-box;
 }
 
-body {
-  min-height: 100vh;
-  height: 100%;
-}
-
 .wrapper {
   max-width: 1200px;
   min-height: 100vh;
+  height: 100%;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
   font-family: 'Mali', cursive;
 }
 
@@ -67,6 +65,7 @@ body {
 
 .main__add__describe {
   font-size: 15px;
+  color: white;
 }
 
 .main__add__form {
@@ -111,7 +110,6 @@ body {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  background-color: pink;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -284,7 +282,7 @@ body {
   margin: 10px 0px;
   position: relative;
   padding: 5px;
-  height: 140px;
+  height: 160px;
   overflow: hidden;
 }
 
@@ -517,5 +515,25 @@ body {
 
 .main__searched-tasks--active {
   display: block;
+}
+
+@media (min-width: 411px) {
+  .main__add__form .add__form__item--category .form__item__title {
+    line-height: 48px;
+  }
+}
+
+@media (min-width: 568px) {
+  .main__add__form .add__form__item--task .form__item__task {
+    -ms-flex-preferred-size: 90%;
+        flex-basis: 90%;
+  }
+}
+
+@media (min-width: 1366px) {
+  .main__add__form .add__form__item--task .form__item__task {
+    -ms-flex-preferred-size: 95%;
+        flex-basis: 95%;
+  }
 }
 /*# sourceMappingURL=style.css.map */
