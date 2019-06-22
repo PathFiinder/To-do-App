@@ -255,12 +255,7 @@ const createDivSearched = (Id, Name, Category, date) => {
     document.querySelector(`[data-dates = "${Id}"]`).appendChild(hSpanDate);
 
 
-    const hBinIcon = document.createElement('i');
-    hBinIcon.classList.add("fas");
-    hBinIcon.classList.add("fa-trash-alt");
-    hBinIcon.classList.add("searched-tasks__item__icon");
-    hBinIcon.dataset.bins = `${Id}`;
-    document.querySelector(`[data-ids = "${Id}"]`).appendChild(hBinIcon);
+
 }
 
 [...taskCategories].forEach(category => {
@@ -312,19 +307,32 @@ btnAddTasks.addEventListener('click', (event) => {
     const tDate = taskDate.value;
 
     if (tName != "" && tCategory != []) {
-        taskId++;
 
-        tasks.push({
-            id: taskId,
-            name: tName,
-            category: tCategory,
-            date: tDate,
-            checked: false
-        });
 
-        activeList.push(tasks[taskId]);
-        createDivActive(activeList[taskId].id, activeList[taskId].name, activeList[taskId].category, activeList[taskId].date);
+        let name;
+        activeList.forEach(element => {
+            if (element != null) {
+                name = element.name
+            }
+        })
 
+        if (tName == name) {
+            alert("Task name already exists");
+        } else {
+
+            taskId++;
+
+            tasks.push({
+                id: taskId,
+                name: tName,
+                category: tCategory,
+                date: tDate,
+                checked: false
+            });
+
+            activeList.push(tasks[taskId]);
+            createDivActive(activeList[taskId].id, activeList[taskId].name, activeList[taskId].category, activeList[taskId].date);
+        }
     } else {
         if (tName == "" && tCategory == []) {
             alert("Insert task name and choose category");
@@ -337,6 +345,7 @@ btnAddTasks.addEventListener('click', (event) => {
 
 
     cleanContent();
+    activeTask.classList.remove("main__active-tasks--disable")
 
 })
 
@@ -347,6 +356,24 @@ activeTask.addEventListener('click', function (event) {
         deleteList.push(activeList[idBin]);
         activeList.splice(idBin, 1, null);
         document.querySelector(`[data-id = "${idBin}"]`).remove();
+        
+
+        let activeL = 0;
+
+        activeList.forEach(element => {
+            if (element == null) {
+                activeL++;
+            }
+        })
+        
+        if (activeList.length == activeL) {
+            activeTask.classList.add("main__active-tasks--disable")
+        }
+
+
+
+
+
     } else if (event.target.dataset.true) {
         const switchTrueId = event.target.dataset.true;
         document.querySelector(`[data-false = "${switchTrueId}"]`).classList.remove('active-tasks__item__switch--active-false');
@@ -356,8 +383,10 @@ activeTask.addEventListener('click', function (event) {
         let idF;
 
         finishedList.forEach((element, index) => {
-            if (element.name == nameF) {
-                idF = finishedList.indexOf(element);
+            if (element != null) {
+                if (element.name == nameF) {
+                    idF = finishedList.indexOf(element);
+                }
             }
         });
 
@@ -367,6 +396,20 @@ activeTask.addEventListener('click', function (event) {
         if (finishedList != []) {
             finishedTask.classList.add('main__finished-tasks--active');
         }
+
+        let activeL = 0;
+
+        activeList.forEach(element => {
+            if (element == null) {
+                activeL++;
+            }
+        })
+        
+        if (activeList.length == activeL) {
+            activeTask.classList.add("main__active-tasks--disable");
+        }
+
+
     }
 
 
@@ -375,6 +418,7 @@ activeTask.addEventListener('click', function (event) {
 
 finishedTask.addEventListener('click', function (event) {
     if (event.target.dataset.binf) {
+        finishedList = [];
         const idBin = event.target.dataset.binf;
         deleteList.push(activeList[idBin]);
         activeList.splice(idBin, 1, null);
@@ -383,12 +427,27 @@ finishedTask.addEventListener('click', function (event) {
 
 
         finishedList.forEach((element) => {
-            if (element.name == finishedList[idBin].name) {
-                finishId = finishedList.indexOf(element);
+            if (element != null) {
+                if (element.name == finishedList[idBin].name) {
+                    finishId = finishedList.indexOf(element);
+                }
             }
         });
 
-        finishedList.splice(finishId, 1);
+        finishedList.splice(finishId, 1, null);
+
+        let activeL = 0;
+
+        activeList.forEach(element => {
+            if (element == null) {
+                activeL++;
+            }
+        })
+        
+        if (activeList.length == activeL) {
+            activeTask.classList.add("main__active-tasks--disable")
+            finishedTask.classList.remove('main__finished-tasks--active');
+        }
     }
 })
 
@@ -404,20 +463,24 @@ searchSection.addEventListener('input', (event) => {
     const inputValue = event.target.value.toLowerCase();
 
     activeList.forEach((element) => {
-        element.checked = false;
+        if (element != null) {
+            element.checked = false;
+        }
     })
 
 
 
 
     activeList.forEach((element) => {
-        const eleValue = element.name.toLowerCase();
-        if (inputValue != "") {
-            if (eleValue.includes(inputValue)) {
-                //console.log(element.name);
-                if (element.checked == false) {
-                    searchedList.push(element);
-                    element.checked = true;
+        if (element != null) {
+            const eleValue = element.name.toLowerCase();
+            if (inputValue != "") {
+                if (eleValue.includes(inputValue)) {
+                    //console.log(element.name);
+                    if (element.checked == false) {
+                        searchedList.push(element);
+                        element.checked = true;
+                    }
                 }
             }
         }
@@ -430,4 +493,3 @@ searchSection.addEventListener('input', (event) => {
     //console.log(searchedList);
 
 })
-

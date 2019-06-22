@@ -1,23 +1,28 @@
 .main__searched-tasks
     display: none
+    width: 90%
+    margin: 20px auto 0px auto
+    position: relative
+    padding-top: 2px
+    &__title
+        font-size: 18px
+        position: absolute
+        top: -12px
+        left: -8px
+        
     &__item
             background-color: white
             border: 1px solid black
-            margin: 10px 0px
             position: relative
             padding: 5px
-            height: 160px
+            height: 120px
+            width: 90%
+            margin: 20px auto
+            overflow: hidden
             .searched-tasks__item__name,.searched-tasks__item__category,.searchedtasks__item__date
                 font-size: 18px
                 .item__name--span, .item__category--span,.item__date--span
                     font-size: 16px
                     font-weight: normal
-            .searched-tasks__item__icon
-                position: absolute
-                top: 50%
-                right: 10px
-                transform: translateY(-50%)
-                font-size: 20px
-                color: red
     &--active
         display: block

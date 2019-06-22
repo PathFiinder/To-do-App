@@ -5,12 +5,15 @@
           box-sizing: border-box;
 }
 
+body {
+  min-height: 100vh;
+  height: 100%;
+}
+
 .wrapper {
   max-width: 1200px;
   min-height: 100vh;
-  height: 100%;
   margin: 0 auto;
-  position: relative;
   font-family: 'Mali', cursive;
 }
 
@@ -41,9 +44,9 @@
 
 .wrapper .background-image {
   position: absolute;
-  top: 50px;
+  top: 0;
   left: 0;
-  height: calc(100% - 54px);
+  height: 100%;
   z-index: -1;
 }
 
@@ -281,7 +284,8 @@
   margin: 10px 0px;
   position: relative;
   padding: 5px;
-  height: 160px;
+  height: 140px;
+  overflow: hidden;
 }
 
 .main__active-tasks__item .active-tasks__item__name, .main__active-tasks__item .active-tasks__item__category, .main__active-tasks__item .active-tasks__item__date {
@@ -291,6 +295,10 @@
 .main__active-tasks__item .active-tasks__item__name .item__name--span, .main__active-tasks__item .active-tasks__item__name .item__category--span, .main__active-tasks__item .active-tasks__item__name .item__date--span, .main__active-tasks__item .active-tasks__item__category .item__name--span, .main__active-tasks__item .active-tasks__item__category .item__category--span, .main__active-tasks__item .active-tasks__item__category .item__date--span, .main__active-tasks__item .active-tasks__item__date .item__name--span, .main__active-tasks__item .active-tasks__item__date .item__category--span, .main__active-tasks__item .active-tasks__item__date .item__date--span {
   font-size: 16px;
   font-weight: normal;
+}
+
+.main__active-tasks__item .active-tasks__item__name .item__category--span, .main__active-tasks__item .active-tasks__item__category .item__category--span, .main__active-tasks__item .active-tasks__item__date .item__category--span {
+  font-size: 14px;
 }
 
 .main__active-tasks__item .active-tasks__item__icon {
@@ -474,15 +482,28 @@
 
 .main__searched-tasks {
   display: none;
+  width: 90%;
+  margin: 20px auto 0px auto;
+  position: relative;
+  padding-top: 2px;
+}
+
+.main__searched-tasks__title {
+  font-size: 18px;
+  position: absolute;
+  top: -12px;
+  left: -8px;
 }
 
 .main__searched-tasks__item {
   background-color: white;
   border: 1px solid black;
-  margin: 10px 0px;
   position: relative;
   padding: 5px;
-  height: 160px;
+  height: 120px;
+  width: 90%;
+  margin: 20px auto;
+  overflow: hidden;
 }
 
 .main__searched-tasks__item .searched-tasks__item__name, .main__searched-tasks__item .searched-tasks__item__category, .main__searched-tasks__item .searchedtasks__item__date {
@@ -492,16 +513,6 @@
 .main__searched-tasks__item .searched-tasks__item__name .item__name--span, .main__searched-tasks__item .searched-tasks__item__name .item__category--span, .main__searched-tasks__item .searched-tasks__item__name .item__date--span, .main__searched-tasks__item .searched-tasks__item__category .item__name--span, .main__searched-tasks__item .searched-tasks__item__category .item__category--span, .main__searched-tasks__item .searched-tasks__item__category .item__date--span, .main__searched-tasks__item .searchedtasks__item__date .item__name--span, .main__searched-tasks__item .searchedtasks__item__date .item__category--span, .main__searched-tasks__item .searchedtasks__item__date .item__date--span {
   font-size: 16px;
   font-weight: normal;
-}
-
-.main__searched-tasks__item .searched-tasks__item__icon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  font-size: 20px;
-  color: red;
 }
 
 .main__searched-tasks--active {

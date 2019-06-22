@@ -3,13 +3,16 @@
     padding: 0
     box-sizing: border-box
 
-    
+body
+    min-height: 100vh
+    height: 100%
+
 .wrapper
     max-width: 1200px
     min-height: 100vh
-    height: 100%
     margin: 0 auto 
-    position: relative
+    //position: relative
+    
     font-family: 'Mali', cursive
     .main__buttons
         height: 50px
@@ -26,9 +29,9 @@
                 color: white
     .background-image
         position: absolute
-        top: 50px
+        top: 0
         left: 0
-        height: calc(100% - 54px)
+        height: 100%
         z-index: -1
         &__photo
             height: 100%
