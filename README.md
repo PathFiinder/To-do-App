@@ -2,7 +2,7 @@
 
 Tech Work used:
  - HTML5
- - CSS3 (Flexbox, BEM)
+ - CSS3 (Flexbox)
  - SASS
  - RWD (Mobile First)
  - JavaScript (ES6)
